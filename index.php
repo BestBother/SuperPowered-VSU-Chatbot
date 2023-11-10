@@ -1,99 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<title> Hackathon </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in</title>
+  <link rel="stylesheet" href="login-page.css">
+  <script defer src="login-page.js"></script>
 </head>
 <style>
-ul {
-  list-style-type: none;
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
   margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background-color: #ff8103;
 }
 
-li {
-  float: left;
+#main-holder {
+  width: 50%;
+  height: 70%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 7px;
+  box-shadow: 0px 0px 5px 2px black;
 }
 
-li a {
-  display: block;
+#login-form {
+  align-self: flex-start;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.login-form-field::placeholder {
+  color: #2600ff;
+}
+
+.login-form-field {
+  border: none;
+  border-bottom: 1px solid #2600ff;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  outline: none;
+  padding: 0px 0px 5px 5px;
+}
+
+#login-form-submit {
+  width: 100%;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
   color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: #111;
+  font-weight: bold;
+  background-color: black;
+  cursor: pointer;
+  outline: none;
 }
 </style>
 <body>
- <ul>
-  <li><a class="active" href="#home">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
-</ul>
-
-
-<div id="main">
-
-<?php
-$servername = "localhost";
-$username = "Bother";
-$password = "1234";
-$dbname = "mbr_test_database";
-
-error_reporting(E_ALL ^ E_WARNING); 
-$email = $_POST['email'];
-$psw = $_POST['psw'];
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-  if ($email != "" && $psw != ""){
-
-        $sql_query = "select count(*) as owner from owner where email ='".$email."' and psw ='".$psw."'";
-        $result = mysqli_query($conn,$sql_query);
-        $row = mysqli_fetch_array($result);
-
-        $count = $row['owner'];
-
-        if($count > 0){
-			session_start();
-			$_SESSION['email'] = $email;
-            
-     
-        }else{
-            echo "Invalid email and/or password";
-        }
-
-    }
-    if(isset($_SESSION)){ 
-	echo $_SESSION['email']." Logged in";
-	?>
-	<?php
-		}
-include 'connect.php';
-?>
-<h2> Superpowered VSU chatbot </h2>
-<form method = "post" action="">
-	
-	<label for="fname"><b>Email:</b></</label><br>
-	<input type="text" id="email" name="email" placeholder="Johndoe@gmail.com" required><br>
-	
-
-	<label for="psw"><b>Password</b></label><br>
-	<input type="password" id = "psw" placeholder="Enter Password" name="psw" required> <br>
-	
-	<input type="submit" value="Login">
-</form> 
-<br><br>
-<a href = "MBR_signup.php">Dont have an account? Sign up here!</a>
-</div> 
+  <main id="main-holder">
+    <h1 id="login-header">Sign in</h1>
+    
+    
+    <form method = "post" action="VSU_Bot.php">
+      <input type="text" name="Course One" id="Course_One" class="Courses" placeholder="Course One">
+      <input type="text" name="Course Two" id="Course_Two" class="Courses" placeholder="Course Two">
+      <input type="submit" value="Login" id="login-form-submit">
+    </form>
+  
+  </main>
 </body>
+
 </html>
